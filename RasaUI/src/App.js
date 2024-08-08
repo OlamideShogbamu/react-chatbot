@@ -12,8 +12,6 @@ function App() {
       
       <div className="App">
         <br/>
-        <ChatForm />
-        <br/>
         <Basic />
       </div>
     </>
