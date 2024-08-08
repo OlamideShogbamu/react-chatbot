@@ -1,4 +1,5 @@
 import './chatBot.css';
+import ChatForm from './ChatForm';
 import react, { useEffect, useState } from 'react';
 import {IoMdSend}  from 'react-icons/io';
 import {BiBot,BiUser} from 'react-icons/bi';
@@ -7,6 +8,7 @@ function Basic(){
     const [chat,setChat] = useState([]);
     const [inputMessage,setInputMessage] = useState('');
     const [botTyping,setbotTyping] = useState(false);
+    const [userName, setUserName] = useState('');
 
     
    useEffect(()=>{
@@ -14,24 +16,21 @@ function Basic(){
         console.log("called");
         const objDiv = document.getElementById('messageArea');
         objDiv.scrollTop = objDiv.scrollHeight;
-        
-    
     },[chat])
 
     
 
 
-    const handleSubmit=(evt)=>{
+    const handleSubmit=(evt, submittedName)=>{
         evt.preventDefault();
-        const name = "shreyas";
-        const request_temp = {sender : "user", sender_id : name , msg : inputMessage};
+        const request_temp = {sender : "user", sender_id : submittedName, msg : inputMessage};
         
         if(inputMessage !== ""){
             
             setChat(chat => [...chat, request_temp]);
             setbotTyping(true);
             setInputMessage('');
-            rasaAPI(name,inputMessage);
+            rasaAPI(submittedName,inputMessage);
         }
         else{
             window.alert("Please enter valid message");
@@ -41,7 +40,6 @@ function Basic(){
 
 
     const rasaAPI = async function handleClick(name,msg) {
-    
         //chatData.push({sender : "user", sender_id : name, msg : msg});
         
 
@@ -91,7 +89,7 @@ function Basic(){
              
     const styleBody = {
         paddingTop : '10px',
-        height: '28rem',
+        height: '30rem',
         overflowY: 'a',
         overflowX: 'hidden',      
     };
@@ -105,32 +103,26 @@ function Basic(){
         <div className="row justify-content-center">
             
                 <div className="card" style={stylecard}>
-                    
+                    <ChatForm onSubmit={handleSubmit} />
                     <div className="cardBody" id="messageArea" style={styleBody}>
                         
                         <div className="row msgarea">
                             {chat.map((user,key) => (
                                 <div key={key}>
-                                    {user.sender==='bot' ?
-                                        (
-                                            
-                                            <div className= 'msgalignstart'>
+                                    {user.sender==='bot' ? (
+                                            <div className= 'msgalignend'>
                                                 <BiBot className="botIcon"  /><h5 className="botmsg">{user.msg}</h5>
                                             </div>
-                                        
-                                        )
-
+                                        ) 
                                         :(
-                                            <div className= 'msgalignend'>
+                                            <div className= 'msgalignstart'>
                                                 <h5 className="usermsg">{user.msg}</h5><BiUser className="userIcon" />
                                             </div>
                                         )
                                     }
                                 </div>
-                            ))}
-                            
+                            ))}  
                         </div>
-                
                     </div>
                     <div className="cardFooter text-white" style={styleFooter}>
                         <div className="row">
