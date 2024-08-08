@@ -9,14 +9,14 @@ function Basic(){
     const [botTyping,setbotTyping] = useState(false);
 
     
-//    useEffect(()=>{
+   useEffect(()=>{
    
-//         console.log("called");
-//         const objDiv = document.getElementById('messageArea');
-//         objDiv.scrollTop = objDiv.scrollHeight;
+        console.log("called");
+        const objDiv = document.getElementById('messageArea');
+        objDiv.scrollTop = objDiv.scrollHeight;
         
     
-//     },[chat])
+    },[chat])
 
     
 
@@ -77,35 +77,24 @@ function Basic(){
 
     const stylecard = {
         maxWidth : '35rem',
-        border: '1px solid black',
         paddingLeft: '0px',
         paddingRight: '0px',
         borderRadius: '30px',
-        boxShadow: '0 16px 20px 0 rgba(0,0,0,0.4)'
+        backgroundColor: 'transparent',
+        outline: 'none',
+        // border: 'none',
+    };
 
-    }
-    const styleHeader = {
-        height: '4.5rem',
-        borderBottom : '1px solid black',
-        borderRadius: '30px 30px 0px 0px',
-        backgroundColor: '#8012c4',
-
-    }
     const styleFooter = {
-        //maxWidth : '32rem',
-        borderTop : '1px solid black',
-        borderRadius: '0px 0px 30px 30px',
-        backgroundColor: '#8012c4',
-        
-        
-    }
+        display: botTyping ? 'block' : 'none',
+      };
+             
     const styleBody = {
         paddingTop : '10px',
         height: '28rem',
         overflowY: 'a',
-        overflowX: 'hidden',
-        
-    }
+        overflowX: 'hidden',      
+    };
 
     return (
       <div>
@@ -116,13 +105,7 @@ function Basic(){
         <div className="row justify-content-center">
             
                 <div className="card" style={stylecard}>
-                    <div className="cardHeader text-white" style={styleHeader}>
-                        <h1 style={{marginBottom:'0px'}}>AI Assistant</h1>
-                        {botTyping ? <h6>Bot Typing....</h6> : null}
-                        
-                        
-                        
-                    </div>
+                    
                     <div className="cardBody" id="messageArea" style={styleBody}>
                         
                         <div className="row msgarea">
@@ -152,12 +135,7 @@ function Basic(){
                     <div className="cardFooter text-white" style={styleFooter}>
                         <div className="row">
                             <form style={{display: 'flex'}} onSubmit={handleSubmit}>
-                                <div className="col-10" style={{paddingRight:'0px'}}>
-                                    <input onChange={e => setInputMessage(e.target.value)} value={inputMessage} type="text" className="msginp"></input>
-                                </div>
-                                <div className="col-2 cola">
-                                    <button type="submit" className="circleBtn" ><IoMdSend className="sendBtn" /></button>
-                                </div>
+                                
                             </form>
                         </div>
                     </div>
@@ -166,7 +144,7 @@ function Basic(){
         </div>
         </div>
 
-      </div>
+        </div>
     );
 }
   
