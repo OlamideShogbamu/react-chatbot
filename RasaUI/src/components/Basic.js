@@ -9,14 +9,14 @@ function Basic(){
     const [botTyping,setbotTyping] = useState(false);
 
     
-   useEffect(()=>{
+//    useEffect(()=>{
    
-        console.log("called");
-        const objDiv = document.getElementById('messageArea');
-        objDiv.scrollTop = objDiv.scrollHeight;
+//         console.log("called");
+//         const objDiv = document.getElementById('messageArea');
+//         objDiv.scrollTop = objDiv.scrollHeight;
         
     
-    },[chat])
+//     },[chat])
 
     
 

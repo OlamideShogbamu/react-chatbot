@@ -1,5 +1,28 @@
+body {
+  margin: 0;
+  padding: 0;
+  background-color: #F1F2F9;
+  font-family: Arial, sans-serif;
+}
+
 .App {
   text-align: center;
+}
+
+.header {
+  background-color: #ffffff;
+  padding: 30px;
+  text-align: left;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+h1 {
+  margin: 0;
+  color: #333;
+}
+
+.mh_space {
+  margin-bottom: 0.1em;
 }
 
 .App-logo {
@@ -25,7 +48,7 @@
 }
 
 .App-link {
-  color: #61dafb;
+  color: #61d3fb;
 }
 
 @keyframes App-logo-spin {
@@ -36,3 +59,4 @@
     transform: rotate(360deg);
   }
 }
+
