@@ -2,7 +2,7 @@
 import React, { useState } from 'react';
 import './ChatForm.css'; // Import the corresponding CSS file
 
-const ChatForm = () => {
+const ChatForm = ({onSubmit}) => {
   const [name, setName] = useState('');
 
   const handleNameChange = (e) => {
@@ -11,7 +11,8 @@ const ChatForm = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    // Handle form submission (e.g., send the name to a server)
+    onSubmit(e, name);
+    setName('');
     console.log('Submitted name:', name);
   };
 
