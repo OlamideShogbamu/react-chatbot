@@ -1,3 +1,4 @@
+import React from 'react';
 import './App.css';
 import Basic from "./components/Basic"
 import ChatForm from "./components/ChatForm"

@@ -1,0 +1,32 @@
+.stylecard {
+    max-width : 35rem;
+    padding-left : 0px;
+    padding-right: 0px;
+    border-radius: 30px;
+    background-color: transparent;
+    /* outline: none;
+    border: none; */
+};
+
+.styleFooter {
+    display: none;
+  }
+         
+.styleBody {
+    padding-top: 10px;
+    height: 30rem;
+    overflow-y: auto;
+    overflow-x: hidden;      
+}
+
+.messages {
+    height: 200px;
+    overflow-y: auto;
+    border-bottom: 1px solid #ccc;
+    padding: 10px;
+  }
+  
+  .message {
+    margin-bottom: 10px;
+  }
+  
