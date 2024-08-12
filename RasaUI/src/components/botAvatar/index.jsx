@@ -1,0 +1,27 @@
+import React from "react";
+
+const BotAvatar = () => {
+  console.log("avatar open");
+  return (
+    <div
+      style={{
+        width: "40px",
+        height: "40px",
+        borderRadius: "50%",
+        overflow: "hidden", // This ensures the image stays within the rounded container
+      }}
+    >
+      <img
+        src="https://static.landbot.io/daisho/img/avatar-landbot-1.png"
+        alt="bot image"
+        style={{
+          width: "100%", // Ensure the image fills the container width
+          height: "100%", // Ensure the image fills the container height
+          objectFit: "cover", // Maintain aspect ratio and cover the entire container
+        }}
+      />
+    </div>
+  );
+};
+
+export default BotAvatar;
