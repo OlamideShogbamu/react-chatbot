@@ -3,7 +3,7 @@ import Paper from "@mui/material/Paper";
 import InputBase from "@mui/material/InputBase";
 import IconButton from "@mui/material/IconButton";
 import SendIcon from "@mui/icons-material/Send";
-import { useChatbot } from "react-chatbot-kit";
+import { createClientMessage, useChatbot } from "react-chatbot-kit";
 import config from "../../chatbot/config";
 import actionProvider from "../../chatbot/ActionProvider";
 import messageParser from "../../chatbot/MessageParser";
@@ -17,8 +17,8 @@ export default function CustomizedInputBase(props) {
     actionProvider,
     messageParser,
   });
-  console.log(messageParser);
-  console.log(pro);
+  // console.log(messageParser);
+  // console.log(pro);
   // Function to handle the input change
   const handleInputChange = (event) => {
     setInputValue(event.target.value);
@@ -31,6 +31,8 @@ export default function CustomizedInputBase(props) {
       // Perform send action here (e.g., send the message to a chat server)
       // actions.addUserMessage(inputValue);
       props.actionProvider.enterName(inputValue);
+      // pro.enterName(inputValue);
+      // createClientMessage(inputValue);
       // parser.parse(inputValue);
       // Clear the input after sending
       setInputValue("");
