@@ -5,6 +5,7 @@ import Options from "../components/Options/Options";
 import Quiz from "../components/Quiz/Quiz";
 import BotAvatar from "../components/botAvatar";
 import CustomizedInputBase from "../components/nameInput";
+import Buttons from "../components/botAvatar/buttons";
 
 const config = {
   // botName: "LearningBot",
@@ -16,12 +17,21 @@ const config = {
   initialMessages: [
     createChatBotMessage(`Hello. What's your name?`, { widget: "inputName" }),
   ],
+  state: {
+    name: "",
+    state: "",
+    buttons: [],
+    counter: 0,
+  },
+
   widgets: [
     {
       widgetName: "inputName",
-      widgetFunc: (props) => (
-        <CustomizedInputBase {...props} title="what is your title?" />
-      ),
+      widgetFunc: (props) => <CustomizedInputBase {...props} />,
+    },
+    {
+      widgetName: "buttons",
+      widgetFunc: (props) => <Buttons {...props} title="CHOOSE AN OPTION" />,
     },
     {
       widgetName: "options",
