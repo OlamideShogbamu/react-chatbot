@@ -3,16 +3,20 @@ import React from "react";
 
 const Buttons = (props) => {
   const [show, setShow] = React.useState(true);
-
+  const buttonActions = [
+    props.actionProvider.addStateToState,
+    props.actionProvider.addLgaToState,
+  ];
+  const counter = props.actionProvider.stateRef.counter;
   const handleSend = (name) => {
     console.log("Sending button:", name);
-    console.log("counter = ", props.actionProvider.stateRef.counter);
+    console.log(
+      "counter = ",
+      props.actionProvider.stateRef.counter,
+      props.actionProvider.addLgaToState
+    );
     props.actionProvider.enterName(name);
-    if (props.actionProvider.stateRef.counter === 0) {
-      props.actionProvider.addStateToState(name);
-    } else if (props.actionProvider.stateRef.counter === 1) {
-      props.actionProvider.addLgaToState(name);
-    }
+    if (buttonActions[counter]) buttonActions[counter](name);
     setShow(false);
     // props.actionProvider.showSelectState(name);
     console.log(props.actionProvider.stateRef.buttons);
