@@ -11,9 +11,12 @@ body {
 
 .header {
   background-color: #ffffff;
-  padding: 30px;
+  padding: 15px 30px;
   text-align: left;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  position: fixed;
+  width: 100%;
+  height: 70px;
 }
 
 h1 {
@@ -22,6 +25,7 @@ h1 {
 }
 
 .mh_space {
+  font-size: 20px;
   margin-bottom: 0.1em;
 }
 
@@ -69,9 +73,15 @@ h1 {
   align-items: center;
   width: 100%;
 }
+.react-chatbot-kit-chat-container::-webkit-scrollbar {
+  display: none;
+}
 .react-chatbot-kit-chat-container {
+  margin-top: 90px;
   width: 100% !important;
   max-width: 600px;
+  overflow: scroll;
+  height: 80vh;
 }
 .react-chatbot-kit-chat-inner-container {
   background-color: #f1f2f9 !important;

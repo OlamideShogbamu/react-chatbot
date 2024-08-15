@@ -19,7 +19,8 @@ const config = {
   ],
   state: {
     name: "",
-    state: "",
+    selectedState: "",
+    selectedLga: "",
     buttons: [],
     counter: 0,
   },

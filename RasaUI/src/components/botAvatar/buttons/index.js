@@ -4,14 +4,17 @@ import React from "react";
 const Buttons = (props) => {
   const [show, setShow] = React.useState(true);
 
-  const data = ["Gombe", "Kaduna", "Kano", "Lagos"];
-
   const handleSend = (name) => {
     console.log("Sending button:", name);
-    props.actionProvider.addStateToState(name);
+    console.log("counter = ", props.actionProvider.stateRef.counter);
     props.actionProvider.enterName(name);
+    if (props.actionProvider.stateRef.counter === 0) {
+      props.actionProvider.addStateToState(name);
+    } else if (props.actionProvider.stateRef.counter === 1) {
+      props.actionProvider.addLgaToState(name);
+    }
     setShow(false);
-    props.actionProvider.showSelectState(name);
+    // props.actionProvider.showSelectState(name);
     console.log(props.actionProvider.stateRef.buttons);
   };
 
@@ -34,15 +37,22 @@ const Buttons = (props) => {
             style={{
               width: "80%",
               display: "flex",
-              justifyContent: "space-between",
+              // justifyContent: "space-between",
+              flexWrap: "wrap",
             }}
           >
-            {(props.actionProvider.stateRef.buttons || data).map((name) => {
+            {props.actionProvider.stateRef.buttons.map((name) => {
               return (
                 <Button
                   key={name}
                   variant="contained"
-                  style={{ background: "#e6237e", fontWeight: 500 }}
+                  style={{
+                    background: "#e6237e",
+                    fontWeight: 500,
+                    marginTop: "10px",
+                    minWidth: "22%",
+                    marginRight: "10px",
+                  }}
                   onClick={() => handleSend(name)}
                 >
                   {name}

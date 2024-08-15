@@ -30,7 +30,7 @@ function App() {
       <CustomChatBotStyles />
       <div className="header">
         <h1 className="mh_space">GeoST4R Chatbot</h1>
-        <span style={{ color: "rgb(149, 150, 147)" }}>
+        <span style={{ color: "rgb(149, 150, 147)", fontSize: "15px" }}>
           RMNCHN on-the-go field assistant
         </span>
       </div>
