@@ -6,19 +6,36 @@ const Buttons = (props) => {
   const buttonActions = [
     props.actionProvider.addStateToState,
     props.actionProvider.addLgaToState,
+    props.actionProvider.addWardToState,
+    props.actionProvider.addHcToState,
+    props.actionProvider.showSelectState,
   ];
   const counter = props.actionProvider.stateRef.counter;
+
   const handleSend = (name) => {
     console.log("Sending button:", name);
     console.log(
       "counter = ",
       props.actionProvider.stateRef.counter,
-      props.actionProvider.addLgaToState
+      buttonActions[counter]
     );
+    console.log(name.toLowerCase());
     props.actionProvider.enterName(name);
+    // if (name.toLowerCase() === "go back") {
+    //   if (counter === 0) {
+    //     props.actionProvider.showSelectState();
+    //     console.log("in go back");
+    //   }
+    //   else {
+
+    //     props.actionProvider.decrementCounter();
+    //     buttonActions[counter - 1](name);
+    //     setShow(false);
+    //   }
+    //     return;
+    // }
     if (buttonActions[counter]) buttonActions[counter](name);
     setShow(false);
-    // props.actionProvider.showSelectState(name);
     console.log(props.actionProvider.stateRef.buttons);
   };
 
@@ -39,9 +56,8 @@ const Buttons = (props) => {
           </p>
           <div
             style={{
-              width: "80%",
+              width: "100%",
               display: "flex",
-              // justifyContent: "space-between",
               flexWrap: "wrap",
             }}
           >
@@ -54,7 +70,7 @@ const Buttons = (props) => {
                     background: "#e6237e",
                     fontWeight: 500,
                     marginTop: "10px",
-                    minWidth: "22%",
+                    flexBasis: "22%",
                     marginRight: "10px",
                   }}
                   onClick={() => handleSend(name)}
