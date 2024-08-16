@@ -3,15 +3,24 @@ import React from "react";
 
 const Buttons = (props) => {
   const [show, setShow] = React.useState(true);
-
-  const data = ["Gombe", "Kaduna", "Kano", "Lagos"];
+  const buttonActions = [
+    props.actionProvider.addStateToState,
+    props.actionProvider.addLgaToState,
+    props.actionProvider.addWardToState,
+    props.actionProvider.addHcToState,
+  ];
+  const counter = props.actionProvider.stateRef.counter;
 
   const handleSend = (name) => {
     console.log("Sending button:", name);
-    props.actionProvider.addStateToState(name);
+    console.log(
+      "counter = ",
+      props.actionProvider.stateRef.counter,
+      buttonActions[counter]
+    );
     props.actionProvider.enterName(name);
+    if (buttonActions[counter]) buttonActions[counter](name);
     setShow(false);
-    props.actionProvider.showSelectState(name);
     console.log(props.actionProvider.stateRef.buttons);
   };
 
@@ -34,15 +43,21 @@ const Buttons = (props) => {
             style={{
               width: "80%",
               display: "flex",
-              justifyContent: "space-between",
+              flexWrap: "wrap",
             }}
           >
-            {(props.actionProvider.stateRef.buttons || data).map((name) => {
+            {props.actionProvider.stateRef.buttons.map((name) => {
               return (
                 <Button
                   key={name}
                   variant="contained"
-                  style={{ background: "#e6237e", fontWeight: 500 }}
+                  style={{
+                    background: "#e6237e",
+                    fontWeight: 500,
+                    marginTop: "10px",
+                    minWidth: "22%",
+                    marginRight: "10px",
+                  }}
                   onClick={() => handleSend(name)}
                 >
                   {name}
