@@ -35,7 +35,7 @@ export default function CustomizedInputBase(props) {
         <div
           style={{
             width: 300,
-            marginLeft: "9.2%",
+            marginLeft: "4%",
             marginTop: "-5px",
             padding: "5px  20px 0 ",
             background: "#fff",
