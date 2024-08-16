@@ -1,4 +1,4 @@
-import { fetchLgas, fetchWards } from "./api"; // Assuming you have a fetchLgas method in your api file
+import { fetchLgas, fetchWards, fetchHc, fetchSettlement } from "./api";
 
 class ActionProvider {
   constructor(
@@ -21,16 +21,29 @@ class ActionProvider {
     this.addMessageToState(message);
   };
 
-  showSelectState = () => {
+  showSelectState = (name) => {
     const states = ["Lagos", "Kaduna", "Kano", "Gombe"];
-    const message = this.createChatBotMessage("Please select your state", {
-      widget: "buttons",
-      options: states.map((state) => ({ text: state, id: state })),
-    });
+    const AMAdata = [
+      "Microplan",
+      "Ask me Anything",
+      "Weather Information",
+      "Go back",
+    ];
+    const message = this.createChatBotMessage(
+      name ? "Select an option to proceed" : "Please select your state",
+      {
+        widget: "buttons",
+        options: states.map((state) => ({ text: state, id: state })),
+      }
+    );
     this.addMessageToState(message);
     this.setState((prevState) => ({
       ...prevState,
-      buttons: states,
+      buttons: name ? AMAdata : states,
+      counter:
+        name && name.toLowerCase() !== "go back"
+          ? prevState.counter + 1
+          : prevState.counter,
     }));
   };
 
@@ -67,7 +80,7 @@ class ActionProvider {
   enterName = (name) => {
     const message = this.createClientMessage(name);
     this.addMessageToState(message);
-    this.addNameToState(name); // Store the selected name in state
+    this.addNameToState(name);
   };
 
   promptLogin = () => {
@@ -108,12 +121,75 @@ class ActionProvider {
     }
   };
 
-  handleJavascriptQuiz = () => {
-    const message = this.createChatBotMessage(
-      "Fantastic. Here is your quiz. Good luck!",
-      { widget: "javascriptQuiz" }
-    );
-    this.addMessageToState(message);
+  fetchHcForWards = async (ward_name) => {
+    console.log("in fetchHcForWards");
+    try {
+      const data = await fetchHc(ward_name);
+      if (data.error) {
+        const errorMessage = this.createChatBotMessage(
+          `Error fetching health centers: ${data.error}`
+        );
+        this.addMessageToState(errorMessage);
+      } else {
+        const hcOptions = data.map((hc) => ({ text: hc, id: hc }));
+        const message = this.createChatBotMessage(
+          "Please select a health center:",
+          {
+            widget: "buttons",
+            options: hcOptions,
+          }
+        );
+        this.addMessageToState(message);
+        this.setState((prevState) => ({
+          ...prevState,
+          buttons: hcOptions.map((option) => option.text),
+          counter: prevState.counter + 1,
+        }));
+      }
+    } catch (error) {
+      console.error("Error fetching health centers:", error);
+      const errorMessage = this.createChatBotMessage(
+        "Sorry, there was an error fetching the health centers. Please try again later."
+      );
+      this.addMessageToState(errorMessage);
+    }
+  };
+
+  fetchSettlementForHc = async (hc_name) => {
+    console.log("in fetchSettlementForHc");
+    try {
+      const data = await fetchSettlement(hc_name);
+      if (data.error) {
+        const errorMessage = this.createChatBotMessage(
+          `Error fetching settlements: ${data.error}`
+        );
+        this.addMessageToState(errorMessage);
+      } else {
+        const settlementOptions = data.map((settlement) => ({
+          text: settlement,
+          id: settlement,
+        }));
+        const message = this.createChatBotMessage(
+          "Please select a settlement:",
+          {
+            widget: "buttons",
+            options: settlementOptions,
+          }
+        );
+        this.addMessageToState(message);
+        this.setState((prevState) => ({
+          ...prevState,
+          buttons: settlementOptions.map((option) => option.text),
+          counter: prevState.counter + 1,
+        }));
+      }
+    } catch (error) {
+      console.error("Error fetching settlements:", error);
+      const errorMessage = this.createChatBotMessage(
+        "Sorry, there was an error fetching the settlements. Please try again later."
+      );
+      this.addMessageToState(errorMessage);
+    }
   };
 
   addMessageToState = (message) => {
@@ -129,16 +205,32 @@ class ActionProvider {
 
   addStateToState = (stateName) => {
     this.setState((prevState) => ({ ...prevState, selectedState: stateName }));
-    this.fetchLgasForState(stateName); // Fetch LGAs after the state is selected
+    this.fetchLgasForState(stateName);
+  };
+
+  addLgaToState = (lgaName) => {
+    this.setState((prevState) => ({ ...prevState, selectedLga: lgaName }));
+    this.fetchWardsForLga(lgaName);
+  };
+
+  addWardToState = (wardName) => {
+    this.setState((prevState) => ({ ...prevState, selectedWard: wardName }));
+    this.fetchHcForWards(wardName);
+  };
+
+  addHcToState = (hcName) => {
+    this.setState((prevState) => ({ ...prevState, selectedHc: hcName }));
+    this.fetchSettlementForHc(hcName);
   };
   addLgaToState = (lgaName) => {
     this.setState((prevState) => ({ ...prevState, selectedLga: lgaName }));
     this.fetchWardsForLga(lgaName); // Fetch LGAs after the state is selected
   };
-  incrementCounter = () => {
+
+  decrementCounter = () => {
     this.setState((prevState) => ({
       ...prevState,
-      counter: prevState.counter + 1,
+      counter: prevState.counter - 1,
     }));
   };
 }
