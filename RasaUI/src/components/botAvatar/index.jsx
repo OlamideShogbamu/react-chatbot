@@ -12,7 +12,7 @@ const BotAvatar = () => {
       }}
     >
       <img
-        src="https://static.landbot.io/daisho/img/avatar-landbot-1.png"
+        src={"/GeoST4R_logo_png.png"}
         alt="bot image"
         style={{
           width: "100%", // Ensure the image fills the container width

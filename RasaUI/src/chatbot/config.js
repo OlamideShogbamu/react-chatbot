@@ -5,7 +5,7 @@ import Options from "../components/Options/Options";
 import Quiz from "../components/Quiz/Quiz";
 import BotAvatar from "../components/botAvatar";
 import CustomizedInputBase from "../components/nameInput";
-import Buttons from "../components/botAvatar/buttons";
+import Buttons from "../components/buttons";
 
 const config = {
   // botName: "LearningBot",
@@ -58,26 +58,25 @@ const config = {
         ],
       },
       // Defines an object of custon components that will replace the stock chatbot components
-
-      customComponents: {
-        // Replaces the default bot avatar
-
-        botAvatar: (props) => <BotAvatar {...props} />,
-
-        // Replaces the default bot chat nessage container
-
-        // botChatMessage: (props) => <CustonChatMessage {...props} />,
-
-        // Replaces the default user icon
-
-        userAvatar: (props) => <></>,
-
-        // Replaces the default user chat nessage
-
-        // userChatMessage: (props) => <MyUserChatMessage {...prop} />
-      },
     },
   ],
+  customComponents: {
+    // Replaces the default bot avatar
+
+    botAvatar: (props) => <BotAvatar {...props} />,
+
+    // Replaces the default bot chat nessage container
+
+    // botChatMessage: (props) => <CustonChatMessage {...props} />,
+
+    // Replaces the default user icon
+
+    userAvatar: (props) => <></>,
+
+    // Replaces the default user chat nessage
+
+    // userChatMessage: (props) => <MyUserChatMessage {...prop} />
+  },
 };
 
 export default config;
